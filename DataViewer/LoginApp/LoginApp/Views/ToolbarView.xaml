@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LoginApp.Views.ToolbarView"
+             Title="ToolbarView"
+             xmlns:dxc="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:model="clr-namespace:LoginApp.Models"
+             xmlns:mct ="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui">
+
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior x:Name="backButton" Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <VerticalStackLayout>
+        <Grid RowDefinitions="50,50,*,50">
+            <dxc:DXToolbar x:Name="toolbar" HeightRequest="40" Grid.Row="0" >
+                <dxc:ToolbarButton  Icon="stylus" Placement="FixedLeft" WidthRequest="27" Clicked="StylusBtn_Clicked"/>
+                <dxc:ToolbarButton  Icon="eraser" Placement="FixedLeft" WidthRequest="27" Clicked="EraserBtn_Clicked"/>
+                <dxc:ToolbarSeparator/>
+                <dxc:ToolbarColorSelector x:Name="toolbarColorSelector" SelectedColorChanged="toolbarColorSelector_SelectedColorChanged"/>
+            </dxc:DXToolbar>
+
+
+            <mct:DrawingView  
+                Grid.Row="2"
+                x:Name="DrawingViewControl"
+                LineColor="{Binding color}"
+                WidthRequest="350"
+                HeightRequest="600"
+                IsMultiLineModeEnabled="True"
+                ShouldClearOnFinish="False"
+                HorizontalOptions="Center"
+                DrawingLineStarted="DrawingViewControl_DrawingLineStarted"
+                DrawingLineCompleted="DrawingViewControl_DrawingLineStarted"
+                VerticalOptions="Center"
+                />
+            <Grid ColumnDefinitions="*,*" Grid.Row="3">
+                <Button Text="Save" Padding="5" Margin="5" Clicked="SaveBtn_Clicked" Grid.Column="1"/>
+                <Button Text="Clear" Padding="5" Margin="5" Clicked="ClearBtn_Clicked" Grid.Column="0"/>
+            </Grid>
+        </Grid>
+        
+
+    </VerticalStackLayout>
+
+</ContentPage>
